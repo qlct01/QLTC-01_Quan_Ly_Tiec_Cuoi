@@ -1,0 +1,97 @@
+use `qltc` ;
+-- -----------------------------------------------------
+-- Table `qltc`.`bkdt2019`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `qltc`.`bkdt2019` ;
+
+CREATE TABLE IF NOT EXISTS `qltc`.`bkdt2019` (
+  `MaDatTiec` INT(11) NOT NULL AUTO_INCREMENT,
+  `MaDSTiec` INT(11) NOT NULL,
+  `MaGD` INT(11) NOT NULL,
+  `MaCa` INT(11) NOT NULL,
+  `TienDatCoc` FLOAT NULL DEFAULT NULL,
+  `SoBanDuTru` INT(11) NULL DEFAULT NULL,
+  `TrangThai` BIT(1) NULL DEFAULT NULL,
+  `TinhTrang` VARCHAR(15) NULL DEFAULT NULL,
+  `BKTime` DATETIME NULL DEFAULT NULL,
+  `DeleteTime` DATETIME NULL DEFAULT NULL,
+  PRIMARY KEY (`MaDatTiec`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 1
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+
+DROP TABLE IF EXISTS `qltc`.`bkct_dat_tiec2019` ;
+CREATE TABLE `qltc`.`bkct_dat_tiec2019` (
+  `MaCT_DatTiec` INT NOT NULL AUTO_INCREMENT,
+  `MaDatTiec` INT NOT NULL,
+  `MaMon` INT NULL,
+  `MaDV` INT NULL,
+  `BKTime` DATETIME NULL DEFAULT NULL,
+  `DeleteTime` DATETIME NULL DEFAULT NULL,
+  PRIMARY KEY (`MaCT_DatTiec`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 1
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+
+
+DROP TABLE IF EXISTS `qltc`.`bkhoadon2019` ;
+CREATE TABLE `qltc`.`bkhoadon2019` (
+  `MaHD` INT NOT NULL AUTO_INCREMENT,
+  `MaDatTiec` INT NOT NULL,
+  `TongTienBan` FLOAT NULL,
+  `NgayThanhToan` VARCHAR(10) NULL,
+  `TrangThai` BIT NULL,
+  `BKTime` DATETIME NULL DEFAULT NULL,
+  `DeleteTime` DATETIME NULL DEFAULT NULL,
+  PRIMARY KEY (`MaHD`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 1
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+
+DROP TABLE IF EXISTS `qltc`.`bkct_hoa_don2019` ;
+CREATE TABLE `qltc`.`bkct_hoa_don2019` (
+  `MaCT_HD` INT NOT NULL AUTO_INCREMENT,
+  `MaHD` INT NOT NULL,
+  `MaDatTiec` INT NOT NULL,
+  `TongTienDV` FLOAT NULL,
+  `TongTienHoaDon` FLOAT NULL,
+  `TienDatCoc` FLOAT NULL,
+  `ConLai` FLOAT NULL,
+  `BKTime` DATETIME NULL DEFAULT NULL,
+  `DeleteTime` DATETIME NULL DEFAULT NULL,
+  PRIMARY KEY (`MaCT_HD`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 1
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+
+
+DROP TABLE IF EXISTS `qltc`.`bkdstiec2019` ;
+CREATE TABLE `qltc`.`bkdstiec2019` (
+  `MaDSTiec` INT NOT NULL AUTO_INCREMENT,
+  `MaGD` INT NOT NULL,
+  `MaSanh` INT NOT NULL,
+  `Ngay` VARCHAR(10) NULL,
+  `Gio` VARCHAR(5) NULL,
+  `SoLuongBan` INT NULL,
+  `BKTime` DATETIME NULL DEFAULT NULL,
+  `DeleteTime` DATETIME NULL DEFAULT NULL,
+  PRIMARY KEY (`MaDSTiec`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 1
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+SET GLOBAL FOREIGN_KEY_CHECKS=0;
