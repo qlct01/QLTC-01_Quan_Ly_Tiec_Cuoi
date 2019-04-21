@@ -1,0 +1,284 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="QLTCModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="8.0" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="ban_an">
+    <Key>
+      <PropertyRef Name="MaBan" />
+    </Key>
+    <Property Name="MaBan" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TenBan" Type="varchar" MaxLength="50" />
+    <Property Name="SoLuong" Type="int" />
+    <Property Name="Gia" Type="int" />
+  </EntityType>
+  <EntityType Name="ct_dat_tiec">
+    <Key>
+      <PropertyRef Name="MaCT_DatTiec" />
+    </Key>
+    <Property Name="MaCT_DatTiec" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MaDatTiec" Type="int" />
+    <Property Name="TienDatCoc" Type="decimal" Precision="10" Scale="0" />
+    <Property Name="SoBanDuTru" Type="int" />
+    <Property Name="NgayDatTiec" Type="datetime" Precision="0" />
+    <Property Name="TinhTrang" Type="bit" />
+  </EntityType>
+  <EntityType Name="ct_hoa_don">
+    <Key>
+      <PropertyRef Name="MaCT_HoaDon" />
+    </Key>
+    <Property Name="MaCT_HoaDon" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MaHD" Type="int" />
+    <Property Name="TongTienDV" Type="int" />
+    <Property Name="TongTienHoaDon" Type="int" />
+    <Property Name="ConLai" Type="decimal" Precision="10" Scale="0" />
+    <Property Name="TinhTrang" Type="bit" />
+  </EntityType>
+  <EntityType Name="dat_tiec">
+    <Key>
+      <PropertyRef Name="MaDatTiec" />
+    </Key>
+    <Property Name="MaDatTiec" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MaSanh" Type="int" Nullable="false" />
+    <Property Name="MaBan" Type="int" Nullable="false" />
+    <Property Name="MaGD" Type="int" Nullable="false" />
+    <Property Name="MaMon" Type="int" Nullable="false" />
+    <Property Name="MaNuoc" Type="int" Nullable="false" />
+    <Property Name="MaDV" Type="int" Nullable="false" />
+    <Property Name="TinhTrang" Type="bit" />
+    <Property Name="TrangThai" Type="varchar" MaxLength="15" />
+  </EntityType>
+  <EntityType Name="dich_vu">
+    <Key>
+      <PropertyRef Name="MaDV" />
+    </Key>
+    <Property Name="MaDV" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TenDV" Type="varchar" MaxLength="50" />
+    <Property Name="Gia" Type="int" />
+  </EntityType>
+  <EntityType Name="gia_dinh">
+    <Key>
+      <PropertyRef Name="MaGD" />
+    </Key>
+    <Property Name="MaGD" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TenGD" Type="varchar" MaxLength="50" />
+    <Property Name="TenCoDau" Type="varchar" MaxLength="50" />
+    <Property Name="TenChuRe" Type="varchar" MaxLength="50" />
+    <Property Name="Email" Type="varchar" MaxLength="30" />
+    <Property Name="DienThoai" Type="varchar" MaxLength="11" />
+    <Property Name="TinhTrang" Type="bit" />
+  </EntityType>
+  <EntityType Name="hoa_don">
+    <Key>
+      <PropertyRef Name="MaHD" />
+    </Key>
+    <Property Name="MaHD" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MaDatTiec" Type="int" />
+    <Property Name="TinhTrang" Type="bit" />
+  </EntityType>
+  <EntityType Name="mon_an">
+    <Key>
+      <PropertyRef Name="MaMon" />
+    </Key>
+    <Property Name="MaMon" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TenMon" Type="varchar" MaxLength="50" />
+    <Property Name="Gia" Type="int" />
+  </EntityType>
+  <EntityType Name="nuoc">
+    <Key>
+      <PropertyRef Name="MaNuoc" />
+    </Key>
+    <Property Name="MaNuoc" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TenNuoc" Type="varchar" MaxLength="50" />
+    <Property Name="Gia" Type="int" />
+  </EntityType>
+  <EntityType Name="sanh">
+    <Key>
+      <PropertyRef Name="MaSanh" />
+    </Key>
+    <Property Name="MaSanh" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TenSanh" Type="varchar" MaxLength="50" />
+    <Property Name="KhuVuc" Type="char" MaxLength="1" />
+    <Property Name="KichThuoc" Type="varchar" MaxLength="30" />
+    <Property Name="Gia" Type="int" />
+    <Property Name="SoLuongBan" Type="int" />
+    <Property Name="TrangThai" Type="varchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="tai_khoan">
+    <Key>
+      <PropertyRef Name="Email" />
+    </Key>
+    <Property Name="Email" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="30" />
+  </EntityType>
+  <Association Name="fk_CTHD_HoaDon_MaHD">
+    <End Role="hoa_don" Type="Self.hoa_don" Multiplicity="0..1" />
+    <End Role="ct_hoa_don" Type="Self.ct_hoa_don" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="hoa_don">
+        <PropertyRef Name="MaHD" />
+      </Principal>
+      <Dependent Role="ct_hoa_don">
+        <PropertyRef Name="MaHD" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fkDatTiec_Ban_MaBan">
+    <End Role="ban_an" Type="Self.ban_an" Multiplicity="1" />
+    <End Role="dat_tiec" Type="Self.dat_tiec" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ban_an">
+        <PropertyRef Name="MaBan" />
+      </Principal>
+      <Dependent Role="dat_tiec">
+        <PropertyRef Name="MaBan" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fkDatTiec_CTDT_MaDatTiec">
+    <End Role="dat_tiec" Type="Self.dat_tiec" Multiplicity="0..1" />
+    <End Role="ct_dat_tiec" Type="Self.ct_dat_tiec" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="dat_tiec">
+        <PropertyRef Name="MaDatTiec" />
+      </Principal>
+      <Dependent Role="ct_dat_tiec">
+        <PropertyRef Name="MaDatTiec" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fkDatTiec_DichVu_MaDV">
+    <End Role="dich_vu" Type="Self.dich_vu" Multiplicity="1" />
+    <End Role="dat_tiec" Type="Self.dat_tiec" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="dich_vu">
+        <PropertyRef Name="MaDV" />
+      </Principal>
+      <Dependent Role="dat_tiec">
+        <PropertyRef Name="MaDV" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fkDatTiec_GiaDinh_MaGD">
+    <End Role="gia_dinh" Type="Self.gia_dinh" Multiplicity="1" />
+    <End Role="dat_tiec" Type="Self.dat_tiec" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="gia_dinh">
+        <PropertyRef Name="MaGD" />
+      </Principal>
+      <Dependent Role="dat_tiec">
+        <PropertyRef Name="MaGD" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fkDatTiec_MonAn_MaMon">
+    <End Role="mon_an" Type="Self.mon_an" Multiplicity="1" />
+    <End Role="dat_tiec" Type="Self.dat_tiec" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="mon_an">
+        <PropertyRef Name="MaMon" />
+      </Principal>
+      <Dependent Role="dat_tiec">
+        <PropertyRef Name="MaMon" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fkDatTiec_Nuoc_MaNuoc">
+    <End Role="nuoc" Type="Self.nuoc" Multiplicity="1" />
+    <End Role="dat_tiec" Type="Self.dat_tiec" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="nuoc">
+        <PropertyRef Name="MaNuoc" />
+      </Principal>
+      <Dependent Role="dat_tiec">
+        <PropertyRef Name="MaNuoc" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fkDatTiec_Sanh_MaSanh">
+    <End Role="sanh" Type="Self.sanh" Multiplicity="1" />
+    <End Role="dat_tiec" Type="Self.dat_tiec" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="sanh">
+        <PropertyRef Name="MaSanh" />
+      </Principal>
+      <Dependent Role="dat_tiec">
+        <PropertyRef Name="MaSanh" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fkGiaDinh_TaiKhoan_Email">
+    <End Role="tai_khoan" Type="Self.tai_khoan" Multiplicity="0..1" />
+    <End Role="gia_dinh" Type="Self.gia_dinh" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tai_khoan">
+        <PropertyRef Name="Email" />
+      </Principal>
+      <Dependent Role="gia_dinh">
+        <PropertyRef Name="Email" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fkHoaDon_DatTiec_MaDT">
+    <End Role="dat_tiec" Type="Self.dat_tiec" Multiplicity="0..1" />
+    <End Role="hoa_don" Type="Self.hoa_don" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="dat_tiec">
+        <PropertyRef Name="MaDatTiec" />
+      </Principal>
+      <Dependent Role="hoa_don">
+        <PropertyRef Name="MaDatTiec" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="QLTCModelStoreContainer">
+    <EntitySet Name="ban_an" EntityType="Self.ban_an" Schema="qltc" store:Type="Tables" />
+    <EntitySet Name="ct_dat_tiec" EntityType="Self.ct_dat_tiec" Schema="qltc" store:Type="Tables" />
+    <EntitySet Name="ct_hoa_don" EntityType="Self.ct_hoa_don" Schema="qltc" store:Type="Tables" />
+    <EntitySet Name="dat_tiec" EntityType="Self.dat_tiec" Schema="qltc" store:Type="Tables" />
+    <EntitySet Name="dich_vu" EntityType="Self.dich_vu" Schema="qltc" store:Type="Tables" />
+    <EntitySet Name="gia_dinh" EntityType="Self.gia_dinh" Schema="qltc" store:Type="Tables" />
+    <EntitySet Name="hoa_don" EntityType="Self.hoa_don" Schema="qltc" store:Type="Tables" />
+    <EntitySet Name="mon_an" EntityType="Self.mon_an" Schema="qltc" store:Type="Tables" />
+    <EntitySet Name="nuoc" EntityType="Self.nuoc" Schema="qltc" store:Type="Tables" />
+    <EntitySet Name="sanh" EntityType="Self.sanh" Schema="qltc" store:Type="Tables" />
+    <EntitySet Name="tai_khoan" EntityType="Self.tai_khoan" Schema="qltc" store:Type="Tables" />
+    <AssociationSet Name="fk_CTHD_HoaDon_MaHD" Association="Self.fk_CTHD_HoaDon_MaHD">
+      <End Role="hoa_don" EntitySet="hoa_don" />
+      <End Role="ct_hoa_don" EntitySet="ct_hoa_don" />
+    </AssociationSet>
+    <AssociationSet Name="fkDatTiec_Ban_MaBan" Association="Self.fkDatTiec_Ban_MaBan">
+      <End Role="ban_an" EntitySet="ban_an" />
+      <End Role="dat_tiec" EntitySet="dat_tiec" />
+    </AssociationSet>
+    <AssociationSet Name="fkDatTiec_CTDT_MaDatTiec" Association="Self.fkDatTiec_CTDT_MaDatTiec">
+      <End Role="dat_tiec" EntitySet="dat_tiec" />
+      <End Role="ct_dat_tiec" EntitySet="ct_dat_tiec" />
+    </AssociationSet>
+    <AssociationSet Name="fkDatTiec_DichVu_MaDV" Association="Self.fkDatTiec_DichVu_MaDV">
+      <End Role="dich_vu" EntitySet="dich_vu" />
+      <End Role="dat_tiec" EntitySet="dat_tiec" />
+    </AssociationSet>
+    <AssociationSet Name="fkDatTiec_GiaDinh_MaGD" Association="Self.fkDatTiec_GiaDinh_MaGD">
+      <End Role="gia_dinh" EntitySet="gia_dinh" />
+      <End Role="dat_tiec" EntitySet="dat_tiec" />
+    </AssociationSet>
+    <AssociationSet Name="fkDatTiec_MonAn_MaMon" Association="Self.fkDatTiec_MonAn_MaMon">
+      <End Role="mon_an" EntitySet="mon_an" />
+      <End Role="dat_tiec" EntitySet="dat_tiec" />
+    </AssociationSet>
+    <AssociationSet Name="fkDatTiec_Nuoc_MaNuoc" Association="Self.fkDatTiec_Nuoc_MaNuoc">
+      <End Role="nuoc" EntitySet="nuoc" />
+      <End Role="dat_tiec" EntitySet="dat_tiec" />
+    </AssociationSet>
+    <AssociationSet Name="fkDatTiec_Sanh_MaSanh" Association="Self.fkDatTiec_Sanh_MaSanh">
+      <End Role="sanh" EntitySet="sanh" />
+      <End Role="dat_tiec" EntitySet="dat_tiec" />
+    </AssociationSet>
+    <AssociationSet Name="fkGiaDinh_TaiKhoan_Email" Association="Self.fkGiaDinh_TaiKhoan_Email">
+      <End Role="tai_khoan" EntitySet="tai_khoan" />
+      <End Role="gia_dinh" EntitySet="gia_dinh" />
+    </AssociationSet>
+    <AssociationSet Name="fkHoaDon_DatTiec_MaDT" Association="Self.fkHoaDon_DatTiec_MaDT">
+      <End Role="dat_tiec" EntitySet="dat_tiec" />
+      <End Role="hoa_don" EntitySet="hoa_don" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
