@@ -40,7 +40,6 @@ namespace QLTC.Models
                     SoLuongBan = soLuongBan
                 };
 
-
                 db.ds_tiec_cuoi.Add(dstc);
                 
                 db.SaveChanges();
@@ -83,9 +82,9 @@ namespace QLTC.Models
                         MaMon = item,
                     };
                     db.ct_dat_tiec.Add(ctdt);
-                }
 
-                db.SaveChanges();
+                    db.SaveChanges();
+                }
 
                 foreach (var item in dsMaDV)
                 {
@@ -95,9 +94,9 @@ namespace QLTC.Models
                         MaDV = item,
                     };
                     db.ct_dat_tiec.Add(ctdt);
-                }
 
-                db.SaveChanges();
+                    db.SaveChanges();
+                }
             }
         }
 

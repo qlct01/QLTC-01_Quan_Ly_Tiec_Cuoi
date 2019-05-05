@@ -9,14 +9,14 @@ namespace QLTC.Models
     {
         public static string sdt = "";
 
-        public void AddTaiKoanAndGiaDinh(string sdt, string tencodau, string tenchure)
+        public void AddTaiKoanAndGiaDinh(string sdt, string tencodau, string tenchure, string matkhau)
         {
             using (var db = new QLTCEntities())
             {
                 tai_khoan tk_N = new tai_khoan()
                 {
                     SDT = sdt,
-                    Password = "123"
+                    Password = matkhau
                 };
                 db.tai_khoan.Add(tk_N);
                 db.SaveChanges();

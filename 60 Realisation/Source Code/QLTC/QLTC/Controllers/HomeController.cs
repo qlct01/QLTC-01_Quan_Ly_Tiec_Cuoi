@@ -54,7 +54,7 @@ namespace QLTC.Controllers
             return View();
         }
 
-        public ActionResult SignIn(string sdt, string tencodau, string tenchure)
+        public ActionResult SignIn(string sdt, string tencodau, string tenchure, string matkhau)
         {
             if (sdt != null && tenchure != null && tencodau != null)
             {
@@ -64,7 +64,7 @@ namespace QLTC.Controllers
                     {
                         tai_khoan tk_F = db.tai_khoan.Where(m => m.SDT == sdt).Single();
                         
-                        ViewBag.ExistAccount = "Tài khoản này đã tồn tại";
+                        ViewBag.ExistAccount = "Tai khoan nay đa ton tai";
 
                         Notice.existAccount = true;
 
@@ -78,13 +78,21 @@ namespace QLTC.Controllers
 
                         TaiKhoanAction tk_A = new TaiKhoanAction();
 
-                        tk_A.AddTaiKoanAndGiaDinh(sdt, tencodau, tenchure);
+                        tk_A.AddTaiKoanAndGiaDinh(sdt, tencodau, tenchure, matkhau);
                     }
                 }
             }
 
             if (Notice.signIn == true) return RedirectToAction("Main", "Home");
             else return View();
+        }
+
+
+        public ActionResult LogOut()
+        {
+            Notice.adminLogIn = false;
+            Notice.logIn = false;
+            return RedirectToAction("Main", "Home");
         }
 
         public ActionResult Main()

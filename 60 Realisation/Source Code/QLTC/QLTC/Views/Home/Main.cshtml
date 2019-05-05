@@ -45,6 +45,7 @@
                             <li><a href="/SetUp/SetUp">Đặt tiệc</a></li>
                             <li><a href="/TaiKhoan/TaiKhoan">Thông tin tài khoản</a></li>
                             <li><a href="/LichSu/LichSu">Lịch sử</a></li>
+                            <li><a href="#" onclick="dangXuat()">Đăng xuất</a></li>
                         }
                         else if (QLTC.Models.Notice.logIn == false && QLTC.Models.Notice.adminLogIn == false && QLTC.Models.Notice.signIn == false)
                         {
@@ -55,6 +56,7 @@
                         else if (QLTC.Models.Notice.logIn == false && QLTC.Models.Notice.adminLogIn == false && QLTC.Models.Notice.signIn == true)
                         {
                             <li><a href="/Home/Main">Trang chủ</a></li>
+                            <li><a href="/Home/SignIn">Đăng ký</a></li>
                             <li><a href="/Home/LogIn">Đăng nhập</a></li>
                         }
                         else if (QLTC.Models.Notice.logIn == false && QLTC.Models.Notice.adminLogIn == true)
@@ -66,6 +68,8 @@
                             <li><a href="/QuyDinh/QuyDinhM">Quản lý quy định</a></li>
                             <li><a href="/BaoCao/BaoCao">Lập báo cáo</a></li>
                             <li><a href="/XemDS/XemDS">Xem danh sách tiệc</a></li>
+                            <li><a href="#" onclick="dangXuat()">Đăng xuất</a></li>
+
                         }
                     }
                 </ul>
@@ -73,7 +77,31 @@
         </section>
 
 
+        <script>
+            function dangXuat() {
+                var check = confirm('Bạn có muốn đăng xuất không?');
+                if (check) {
+                    $.ajax({
+                        type: "POST",
+                        url: '@Url.Action("LogOut", "Home")',
+                        dataType: "html",
+                        contentType: "application/json; charset=utf-8",
+                        success:
+                            function (data) { }
+
+                    });
+                    alert('Đăng xuất thành công!!');
+                }
+                else { return null; }
+                location.reload();
+            }
+
+        </script>
+
+
+
         @{
+
             if (QLTC.Models.Notice.logIn == true && QLTC.Models.Notice.adminLogIn == false && QLTC.Models.Notice.i_L == 0)
             {
                 QLTC.Models.Notice.i_L++;
@@ -93,6 +121,7 @@
             if (QLTC.Models.Notice.signIn && QLTC.Models.Notice.i_S == 0)
             {
                 QLTC.Models.Notice.i_S++;
+                QLTC.Models.Notice.signIn = false;
                 <script>
                     alert("Đăng ký tài khoản thành công");
                 </script>
@@ -105,15 +134,8 @@
                     alert("Cập nhật thông tin tài khoản thành công");
                 </script>
             }
-
-            if (QLTC.Models.Notice.enterSetSup == true && QLTC.Models.Notice.SetUpSuccess == false)
-            {
-                <script>
-                    alert("Thông tin sảnh, ca, ngày bị trùng. Qúy khách vui lòng chọn lại thông tin");
-                </script>
-                QLTC.Models.Notice.enterSetSup = false;
-            }
-            else if (QLTC.Models.Notice.enterSetSup == true && QLTC.Models.Notice.SetUpSuccess == true)
+            
+            if (QLTC.Models.Notice.enterSetSup == true && QLTC.Models.Notice.SetUpSuccess == true)
             {
                 <script>
                     alert("Chúc mừng bạn đã đăng ký tiệc thành công");

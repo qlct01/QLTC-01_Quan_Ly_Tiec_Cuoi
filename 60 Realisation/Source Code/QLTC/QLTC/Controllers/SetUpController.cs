@@ -16,10 +16,34 @@ namespace QLTC.Controllers
             ModelList modelList = new ModelList();
             using (var db = new QLTCEntities())
             {
-                modelList.caM = db.cas.ToList();
-                modelList.ds_sanhsM = db.ds_sanh.ToList();
-                modelList.dich_vuM = db.dich_vu.ToList();
-                modelList.mon_anM = db.mon_an.ToList();
+                var query_Ca = (from m in db.cas
+                                where m.TrangThai == false || m.TrangThai == null
+                                select m);
+
+                modelList.caM = query_Ca.ToList();
+
+                var query_Sanh = (from m in db.ds_sanh
+                                  where m.TrangThai == false || m.TrangThai == null
+                                  select m);
+
+                modelList.ds_sanhsM = query_Sanh.ToList();
+
+                var query_DichVu = (from m in db.dich_vu
+                                    where m.TrangThai == false || m.TrangThai == null
+                                    select m);
+
+                modelList.dich_vuM = query_DichVu.ToList();
+
+                var query_MonAn = (from m in db.mon_an
+                                   where m.TrangThai == false || m.TrangThai == null
+                                   select m);
+
+                modelList.mon_anM = query_MonAn.ToList();
+
+                //modelList.caM = db.cas.ToList();
+                //modelList.ds_sanhsM = db.ds_sanh.ToList();
+                //modelList.dich_vuM = db.dich_vu.ToList();
+                //modelList.mon_anM = db.mon_an.ToList();
             }
             return View(modelList);
         }
@@ -78,6 +102,8 @@ namespace QLTC.Controllers
         
         public ActionResult SubmitSetUpDetail(float tiendatcoc, int sobandutru, int soluongban, DateTime ngaydattiec, int hour, int minute, string maca, string mathe)
         {
+            bool done = false;
+
             Notice.enterSetSup = true;
 
             if (mathe != "" && maca != "" && minute != 0 && hour != 0 && ngaydattiec != null && soluongban.ToString() != "" && tiendatcoc.ToString() != "")
@@ -97,14 +123,19 @@ namespace QLTC.Controllers
                     setUp.SaveCTHoaDon(tiendatcoc);
 
                     Notice.SetUpSuccess = true;
+
+                    done = true;
                 }
                 else
                 {
+                    done = false;
+
                     Notice.SetUpSuccess = false;
                 }
             }
-
-            return RedirectToAction("Main", "Home");
+            if (done)
+                return RedirectToAction("Main", "Home");
+            else return RedirectToAction("SetUp", "SetUp");
         }
     }
 }

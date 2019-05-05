@@ -32,5 +32,7 @@ namespace QLTC.Models
         public static int i_U = 0;
         
         public static double tongDoanhThu = 0;
+
+        public static int i_E = 0;
     }
 }

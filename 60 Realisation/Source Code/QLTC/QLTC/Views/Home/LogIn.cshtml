@@ -7,7 +7,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title>No Sidebar - Escape Velocity by HTML5 UP</title>
+    <title>Golden Flower</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="~/Content/main.css" />
@@ -50,7 +50,7 @@
                         <div>
                             <!-- Contact Form -->
                             <section>
-                                <form method="post" action="/Home/LogIn">
+                                <form name="Form" method="post" onsubmit="return validateForm()" action="/Home/LogIn">
                                     <div align="center">
                                         <div>
                                             <label style="margin-left: 10px" id="element1" class="form-check-label" for="defaultCheck1">
@@ -70,7 +70,7 @@
 
                                         <div style="margin-top: 50px" class="col-12">
                                             <ul class="actions">
-                                                <li><input type="submit" id="dangnhap" class="style1" value="Đăng nhập" /></li>
+                                                <li><input type="submit" id="submit" class="style1" value="Đăng nhập" /></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -182,6 +182,19 @@
     <script src="~/Scripts/breakpoints.min.js"></script>
     <script src="~/Scripts/util.js"></script>
     <script src="~/Scripts/main.js"></script>
+
+    <script type="text/javascript">
+        function validateForm() {
+            var a = document.forms["Form"]["sdt"].value;
+            var b = document.forms["Form"]["matkhau"].value;
+            if (a == null || a == "", b == null || b == "") {
+                alert("SĐT hoặc mặt khẩu không được để trống");
+                return false;
+            }
+        }
+    </script>
+
+
 
 </body>
 </html>

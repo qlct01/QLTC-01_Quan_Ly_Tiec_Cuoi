@@ -8,7 +8,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title>Quản lý ca</title>
+    <title>Golden Flower</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="~/Content/main.css" />
@@ -45,6 +45,17 @@
     </style>
 </head>
 
+@{
+    if ((QLTC.Models.Notice.logIn == false && QLTC.Models.Notice.adminLogIn == false) || (QLTC.Models.Notice.logIn == true && QLTC.Models.Notice.adminLogIn == false))
+    {
+<script>
+    alert("Bạn không có quyền truy cập trang web này")
+    window.location = "/Home/Main"
+</script>
+    }
+    else
+    {
+
 <body class="no-sidebar is-preload">
     <div id="page-wrapper">
 
@@ -73,36 +84,36 @@
         <!-- Main -->
         @using (Html.BeginForm("ProcessForm", "Ca", FormMethod.Post))
         {
-            <form action="">
-                <div id="main" class="wrapper style2">
-                    <table id="dsca">
-                        <tr>
-                            <th>Ca</th>
-                            <th></th>
-                        </tr>
+        <form action="">
+            <div id="main" class="wrapper style2">
+                <table id="dsca">
+                    <tr>
+                        <th>Ca</th>
+                        <th></th>
+                    </tr>
 
-                        @foreach (var item in Model.caM)
-                        {
-                            <tr>
-                                <td>@item.TenCa</td>
-                                <td>
-                                    <input type="checkbox" value="@item.MaCa" />
-                                </td>
-                            </tr>
-                        }
+                    @foreach (var item in Model.caM)
+                    {
+                    <tr>
+                        <td>@item.TenCa</td>
+                        <td>
+                            <input type="checkbox" value="@item.MaCa" />
+                        </td>
+                    </tr>
+                    }
 
-                    </table>
+                </table>
 
 
-                    <div align="center" style="margin-top: 50px" class="col-12">
-                        <ul class="actions">
-                            <li><input type="submit" id="them" name="them" class="margin style2" value="Thêm" /></li>
-                            <li><input type="submit" id="xoa" name="xoa" class="margin style1" value="Xóa" /></li>
-                            <li><input type="submit" id="sua" name="sua" class="margin style2" value="Sửa" /></li>
-                        </ul>
-                    </div>
+                <div align="center" style="margin-top: 50px" class="col-12">
+                    <ul class="actions">
+                        <li><input type="submit" id="them" name="them" class="margin style2" value="Thêm" /></li>
+                        <li><input type="submit" id="xoa" name="xoa" class="margin style1" value="Xóa" /></li>
+                        <li><input type="submit" id="sua" name="sua" class="margin style2" value="Sửa" /></li>
+                    </ul>
                 </div>
-            </form>
+            </div>
+        </form>
         }
 
 
@@ -213,22 +224,29 @@
         $(function () {
             $('#sua').click(function () {
                 var STRMS = [];
-                $('input:checked').each(function () {
-                    STRMS.push($(this).attr("value"));
-                });
-                $.ajax({
-                    type: "POST",
-                    url: '@Url.Action("Sua", "Ca")',
-                    dataType: "html",
-                    contentType: "application/json; charset=utf-8",
-                    data: JSON.stringify({
-                        itemSelected: STRMS
-                    }),
-                    success:
-                        function (data) { }
+                if (!$('input:checked').is(':checked')) {
+                    alert('Vui lòng chọn bất kì ca nào để sửa!');
+                    return false;
+                }
+                else {
+                    $('input:checked').each(function () {
+                        STRMS.push($(this).attr("value"));
+                    });
+                    $.ajax({
+                        type: "POST",
+                        url: '@Url.Action("Sua", "Ca")',
+                        dataType: "html",
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify({
+                            itemSelected: STRMS
+                        }),
+                        success:
+                            function (data) { }
 
-                });
-        });
+                    });
+                }
+
+            });
         });
 
     </script>
@@ -237,29 +255,41 @@
         $(function () {
             $('#xoa').click(function () {
                 var STRMS = [];
-                $('input:checked').each(function () {
-                    STRMS.push($(this).attr("value"));
-                    var check_delete = confirm('Bạn có muốn xóa ca này không ?')
-                    if (check_delete) {
-                        $.ajax({
-                            type: "POST",
-                            url: '@Url.Action("Xoa", "Ca")',
-                            dataType: "html",
-                            contentType: "application/json; charset=utf-8",
-                            data: JSON.stringify({
-                                itemSelected: STRMS
-                            }),
-                            success:
-                                function (data) { }
+                if (!$('input:checked').is(':checked')) {
+                    alert('Vui lòng chọn bất kì ca nào để xóa!');
+                    return false;
+                }
+                else {
+                    $('input:checked').each(function () {
+                        STRMS.push($(this).attr("value"));
+                        var check_delete = confirm('Bạn có muốn xóa ca này không ?')
+                        if (check_delete) {
+                            $.ajax({
+                                type: "POST",
+                                url: '@Url.Action("Xoa", "Ca")',
+                                dataType: "html",
+                                contentType: "application/json; charset=utf-8",
+                                data: JSON.stringify({
+                                    itemSelected: STRMS
+                                }),
+                                success:
+                                    function (data) { }
 
-                        });
-                        alert('Xóa thành công!!');
-                    }
-                    else { return null; }
-                });
+                            });
+                            alert('Xóa thành công!!');
+                            location.reload();
+                        }
+                    });
+                }
             });
         });
 
     </script>
 </body>
+    }
+
+}
+
+
+
 </html>

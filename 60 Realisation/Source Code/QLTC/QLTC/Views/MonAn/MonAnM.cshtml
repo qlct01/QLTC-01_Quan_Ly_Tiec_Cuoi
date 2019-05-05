@@ -8,7 +8,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title>Food M</title>
+    <title>Golden Flower</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="~/Content/main.css" />
@@ -43,6 +43,17 @@
         }
     </style>
 </head>
+
+@{
+    if ((QLTC.Models.Notice.logIn == false && QLTC.Models.Notice.adminLogIn == false) || (QLTC.Models.Notice.logIn == true && QLTC.Models.Notice.adminLogIn == false))
+    {
+<script>
+    alert("Bạn không có quyền truy cập trang web này")
+    window.location = "/Home/Main"
+</script>
+    }
+    else
+    {
 
 <body class="no-sidebar is-preload">
     <div id="page-wrapper">
@@ -209,21 +220,27 @@
         $(function () {
             $('#sua').click(function () {
                 var STRMS = [];
-                $('input:checked').each(function () {
-                    STRMS.push($(this).attr("value"));
-                });
-                $.ajax({
-                    type: "POST",
-                    url: '@Url.Action("Sua", "MonAn")',
-                    dataType: "html",
-                    contentType: "application/json; charset=utf-8",
-                    data: JSON.stringify({
-                        itemSelected: STRMS
-                    }),
-                    success:
-                        function (data) { }
+                if (!$('input:checked').is(':checked')) {
+                    alert('Vui lòng chọn bất kì món ăn nào để sửa!');
+                    return false;
+                }
+                else {
+                    $('input:checked').each(function () {
+                        STRMS.push($(this).attr("value"));
+                    });
+                    $.ajax({
+                        type: "POST",
+                        url: '@Url.Action("Sua", "MonAn")',
+                        dataType: "html",
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify({
+                            itemSelected: STRMS
+                        }),
+                        success:
+                            function (data) { }
 
-                });
+                    });
+                }
             });
         });
     </script>
@@ -232,31 +249,44 @@
         $(function () {
             $('#xoa').click(function () {
                 var STRMS = [];
-                $('input:checked').each(function () {
-                    STRMS.push($(this).attr("value"));
-                    var check_delete = confirm('Bạn có muốn xóa món ăn này không?')
-                    if (check_delete) {
-                        $.ajax({
-                            type: "POST",
-                            url: '@Url.Action("Xoa", "MonAn")',
-                            dataType: "html",
-                            contentType: "application/json; charset=utf-8",
-                            data: JSON.stringify({
-                                itemSelected1: STRMS
-                            }),
-                            success:
-                                function (data) { }
+                if (!$('input:checked').is(':checked')) {
+                    alert('Vui lòng chọn bất kì món ăn nào để xóa!');
+                    return false;
+                }
+                else {
+                    $('input:checked').each(function () {
+                        STRMS.push($(this).attr("value"));
+                        var check_delete = confirm('Bạn có muốn xóa món ăn này không?')
+                        if (check_delete) {
+                            $.ajax({
+                                type: "POST",
+                                url: '@Url.Action("Xoa", "MonAn")',
+                                dataType: "html",
+                                contentType: "application/json; charset=utf-8",
+                                data: JSON.stringify({
+                                    itemSelected1: STRMS
+                                }),
+                                success:
+                                    function (data) { }
 
-                        });
-                        alert('Xóa thành công!!');
-                    }
-                    else { return null; }
-                });
+                            });
+                            alert('Xóa thành công!!');
+                            location.reload();
+                        }
+
+                    });
+                }
             });
         });
     </script>
 
 
 </body>
+    }
+
+}
+
+
+
 </html>
 

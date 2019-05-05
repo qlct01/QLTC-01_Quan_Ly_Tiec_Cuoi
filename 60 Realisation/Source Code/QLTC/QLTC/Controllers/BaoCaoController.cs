@@ -31,7 +31,7 @@ namespace QLTC.Controllers
                     var query = (from m in db.ds_tiec_cuoi
                                  join n in db.dat_tiec on m.MaDSTiec equals n.MaDSTiec
                                  join s in db.ct_hoa_don on n.MaDatTiec equals s.MaDatTiec
-                                 select new { m.Ngay}).Distinct();
+                                 select new { m.Ngay }).Distinct();
 
                     foreach (var item in query)
                     {
@@ -77,9 +77,12 @@ namespace QLTC.Controllers
                     model.baoCao_List = temp1;
                 }
                 Notice.tongDoanhThu = tongDoanhThu;
+                Notice.i_E++;
             }
             if (thang == null)
+            {
                 return View();
+            }
             else return View(model);
         }
     }

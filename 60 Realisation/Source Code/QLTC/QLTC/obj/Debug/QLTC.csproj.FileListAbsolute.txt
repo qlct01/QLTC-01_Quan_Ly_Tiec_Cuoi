@@ -261,4 +261,3 @@ F:\CNPM Nang Cao\DoAn\QLTC\QLTC\bin\System.Interactive.Async.xml
 F:\CNPM Nang Cao\DoAn\QLTC\QLTC\bin\System.Memory.xml
 F:\CNPM Nang Cao\DoAn\QLTC\QLTC\bin\System.Numerics.Vectors.xml
 F:\CNPM Nang Cao\DoAn\QLTC\QLTC\bin\System.Runtime.CompilerServices.Unsafe.xml
-F:\CNPM Nang Cao\DoAn\QLTC\QLTC\obj\Debug\QLTC.csprojAssemblyReference.cache

@@ -29,5 +29,10 @@ namespace QLTC.Models
         public DbSet<mon_an> mon_an { get; set; }
         public DbSet<tai_khoan> tai_khoan { get; set; }
         public DbSet<tham_so> tham_so { get; set; }
+        public DbSet<bkct_dat_tiec2019> bkct_dat_tiec2019 { get; set; }
+        public DbSet<bkdt2019> bkdt2019 { get; set; }
+        public DbSet<bkdstiec2019> bkdstiec2019 { get; set; }
+        public DbSet<bkct_hoa_don2019> bkct_hoa_don2019 { get; set; }
+        public DbSet<bkhoadon2019> bkhoadon2019 { get; set; }
     }
 }

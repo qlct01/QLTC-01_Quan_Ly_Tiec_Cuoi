@@ -5,7 +5,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title>No Sidebar - Escape Velocity by HTML5 UP</title>
+    <title>Golden Flower</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="~/Content/main.css" />
@@ -61,10 +61,14 @@
                                             <p>Nhập tên chú rể: </p>
                                             <input type="text" name="tenchure" id="tenchure" placeholder="Tên chú rể" />
                                         </div>
+                                        <div class="col-6 col-12-small">
+                                            <p>Mật khẩu: </p>
+                                            <input type="password" name="matkhau" id="matkhau" placeholder="Mật khẩu" />
+                                        </div>
                                         <br>
                                         <div class="col-12">
                                             <ul class="actions">
-                                                <li><input type="submit" class="style1" value="Đăng ký" /></li>
+                                                <li><input type="submit" id="submit" class="style1" value="Đăng ký" /></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -76,7 +80,7 @@
             </div>
         </div>
 
-        @if(ViewBag.ExistAccount != null)
+        @if (ViewBag.ExistAccount != null)
         {
             <script>
                 alert("@ViewBag.ExistAccount");
@@ -182,6 +186,91 @@
     <script src="~/Scripts/breakpoints.min.js"></script>
     <script src="~/Scripts/util.js"></script>
     <script src="~/Scripts/main.js"></script>
+
+    <script>
+        $(function () {
+            $('#submit').click(function () {
+
+                if (!$("#sdt").val().length) {
+                    alert('Số điện thoại không được để trống');
+                    return false;
+                }
+
+                if ($("#sdt").val().length > 11) {
+                    alert('Số điện thoại không được lớn hơn 11 số');
+                    return false;
+                }
+
+
+                if (/\D/.test($("#sdt").val())) {
+                    alert("Số điện thoại không được ghi chữ, kí tự đặc biệt hoặc có dấu cách!");
+                    return false;
+                }
+
+                if ($("#sdt").val() < 0) {
+                    alert('Số điện thoại không được để âm!');
+                    return false;
+                }
+
+
+                if (!$("#tencodau").val().length) {
+                    alert('Tên cô dâu không được để trống');
+                    return false;
+                }
+
+
+                if (!$("#tenchure").val().length) {
+                    alert('Tên chú rể không được để trống');
+                    return false;
+                }
+
+
+                if (/^\d+$/.test($("#tencodau").val())) {
+                    alert("Tên cô dâu không được ghi chữ có số!");
+                    return false;
+                }
+
+
+                if (/^\d+$/.test($("#tenchure").val())) {
+                    alert("Tên chú rể không được ghi chữ có số!");
+                    return false;
+                }
+
+
+
+                var regex = /^[A-Za-z0-9 ]+$/;
+
+                if (!regex.test($("#tencodau").val())) {
+                    alert("Tên cô dâu không được có ký tự đặc biệt!");
+                    return false;
+                }
+
+                if (!regex.test($("#tenchure").val())) {
+                    alert("Tên chú rể không được có ký tự đặc biệt!");
+                    return false;
+                }
+
+
+                if (!$("#matkhau").val().length) {
+                    alert('Mật khẩu không được để trống');
+                    return false;
+                }
+
+
+                if (!regex.test($("#matkhau").val())) {
+                    alert("Mật khẩu không được có ký tự đặc biệt!");
+                    return false;
+                }
+
+
+                else {
+                    alert("Đăng ký thành công!!!");
+                }
+
+            });
+        });
+    </script>
+
 
 </body>
 </html>
