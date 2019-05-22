@@ -1,0 +1,272 @@
+﻿@model QLTC.Models.LichSuGiaoDichList
+
+@{
+                /**/
+
+                Layout = null;
+}
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Golden Flower</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="~/Content/main.css" />
+
+    <style>
+
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 16px;
+        }
+
+        th {
+            font-size: 20px;
+            font-weight: bold;
+            color: black;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+
+        .margin {
+            margin-left: 35px;
+            margin-right: 35px;
+        }
+    </style>
+</head>
+
+@{
+    if ((QLTC.Models.Notice.logIn == false && QLTC.Models.Notice.adminLogIn == false) || (QLTC.Models.Notice.logIn == false && QLTC.Models.Notice.adminLogIn == true))
+    {
+        <script>
+            alert("Bạn không có quyền truy cập trang web này")
+            window.location = "/Home/Main"
+        </script>
+    }
+    else
+    {
+
+        <body class="no-sidebar is-preload">
+            <div id="page-wrapper">
+
+                <!-- Header -->
+                <section id="header" class="wrapper">
+
+                    <!-- Logo -->
+                    <div id="logo">
+                        <h1><a href="#">LỊCH SỬ GIAO DỊCH</a></h1>
+                        <br />
+                        <h4 style="color: white">(Danh sách món đặt)</h4>
+                    </div>
+
+                    <!-- Nav -->
+                    <nav id="nav">
+                        <ul>
+                            <li><a href="/Home/Main">Trang chủ</a></li>
+                            <li><a href="/SetUp/SetUp">Đặt tiệc</a></li>
+                            <li><a href="/TaiKhoan/TaiKhoan">Thông tin tài khoản</a></li>
+                            <li><a href="/LichSu/LichSu">Lịch sử</a></li>
+                        </ul>
+                    </nav>
+                </section>
+
+                <br />
+                <br />
+
+
+                <div class="container">
+                    <!-- Content -->
+                    <div id="content">
+                        <article class="box post">
+                            <div>
+                                <section>
+                                    <form method="post" action="/TaiKhoan/TaiKhoan">
+                                        <div align="center">
+                                            <div>
+                                                <label style="margin-left: 10px" id="element1" class="form-check-label" for="defaultCheck1">
+                                                    <font style="margin-right: -50px" size="5">Sảnh đặt:</font>
+                                                </label>
+                                                <input type="text" name="sdt" id="element2" disabled value="@QLTC.Models.LichSuAction.TenSanh" />
+                                            </div>
+                                            <div>
+                                                <label style="margin-left: 10px" id="element1" class="form-check-label" for="defaultCheck1">
+                                                    <font style="margin-right: -50px" size="5">Tên cô dâu:</font>
+                                                </label>
+                                                <input type="text" name="sdt" id="element2" disabled value="@QLTC.Models.LichSuAction.TenCoDau" />
+                                            </div>
+                                            <div>
+                                                <label style="margin-left: 10px" id="element1" class="form-check-label" for="defaultCheck1">
+                                                    <font style="margin-right: -50px" size="5">Tên chú rể:</font>
+                                                </label>
+                                                <input type="text" name="sdt" id="element2" disabled value="@QLTC.Models.LichSuAction.TenChuRe" />
+                                            </div>
+                                        </div>
+                                    </form>
+                                </section>
+                            </div>
+                        </article>
+                    </div>
+
+                </div>
+
+
+                <!-- Main -->
+                <div id="main" class="wrapper style2">
+                    <div style="overflow-x:auto;" class="row">
+                        <div class="col-sm-12" style="width: 50%">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Danh sách các món ăn bạn đã đặt</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.ctLichSu_List)
+                                    {
+                                        if (item.TenMon != null)
+                                        {
+                                            <tr style="background-color: white">
+                                                <td>@item.TenMon</td>
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-sm-12" style="width: 50%">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Danh sách các dịch vụ bạn đã đặt</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.ctLichSu_List)
+                                    {
+                                        if (item.TenDV != null)
+                                        {
+                                            <tr style="background-color: white">
+                                                <td>@item.TenDV</td>
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer -->
+                <section id="footer" class="wrapper">
+                    <div class="title">Liên hệ</div>
+                    <div class="container">
+                        <header class="style1">
+                            <h2>Liên hệ ngay với chúng tôi để được tư vấn thêm</h2>
+                            <p>
+                                Nếu có gì không hài lòng mong quý khách phản hồi theo thông tin phía dưới.<br />
+                                Xin lỗi nếu làm quý khách phiền lòng.
+                            </p>
+                        </header>
+                        <div class="row">
+                            <div class="col-6 col-12-medium">
+
+                                <!-- Contact Form -->
+                                <section>
+                                    <form method="post" action="#">
+                                        <div class="row gtr-50">
+                                            <div class="col-6 col-12-small">
+                                                <input type="text" name="name" id="contact-name" placeholder="Name" />
+                                            </div>
+                                            <div class="col-6 col-12-small">
+                                                <input type="text" name="email" id="contact-email" placeholder="Email" />
+                                            </div>
+                                            <div class="col-12">
+                                                <textarea name="message" id="contact-message" placeholder="Message" rows="4"></textarea>
+                                            </div>
+                                            <div class="col-12">
+                                                <ul class="actions">
+                                                    <li><input type="submit" class="style1" value="Send" /></li>
+                                                    <li><input type="reset" class="style2" value="Reset" /></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </section>
+
+                            </div>
+                            <div class="col-6 col-12-medium">
+
+                                <!-- Contact -->
+                                <section class="feature-list small">
+                                    <div class="row">
+                                        <div class="col-6 col-12-small">
+                                            <section>
+                                                <h3 class="icon fa-home">Địa chỉ</h3>
+                                                <p>
+                                                    56 Sư Vạn hạnh<br />
+                                                    Quận 10, TP.HCM<br />
+                                                </p>
+                                            </section>
+                                        </div>
+                                        <div class="col-6 col-12-small">
+                                            <section>
+                                                <h3 class="icon fa-comment">Cộng đồng</h3>
+                                                <p>
+                                                    <a href="#">facebook.com/goldenflower</a><br />
+                                                </p>
+                                            </section>
+                                        </div>
+                                        <div class="col-6 col-12-small">
+                                            <section>
+                                                <h3 class="icon fa-envelope">Email</h3>
+                                                <p>
+                                                    <a href="#">baohua01234@gmail.com</a>
+                                                </p>
+                                            </section>
+                                        </div>
+                                        <div class="col-6 col-12-small">
+                                            <section>
+                                                <h3 class="icon fa-phone">Điện thoại</h3>
+                                                <p>
+                                                    0908545151544
+                                                </p>
+                                            </section>
+                                        </div>
+                                    </div>
+                                </section>
+
+                            </div>
+                        </div>
+                        <div id="copyright">
+                            <ul>
+                                <li>&copy; Golden Flower</li>
+                                <li>Design: <a href="">Nhom lap trinh web</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Scripts -->
+            <script src="~/Scripts/jquery.min.js"></script>
+            <script src="~/Scripts/jquery.dropotron.min.js"></script>
+            <script src="~/Scripts/browser.min.js"></script>
+            <script src="~/Scripts/breakpoints.min.js"></script>
+            <script src="~/Scripts/util.js"></script>
+            <script src="~/Scripts/main.js"></script>
+        </body>
+
+    }
+}
+
+</html>

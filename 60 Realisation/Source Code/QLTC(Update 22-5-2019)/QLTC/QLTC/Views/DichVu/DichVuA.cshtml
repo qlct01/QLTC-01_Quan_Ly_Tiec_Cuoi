@@ -1,0 +1,298 @@
+﻿@{
+    Layout = null;
+}
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Golden Flower</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="~/Content/main.css" />
+
+    <style>
+
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 16px;
+        }
+
+        th {
+            font-size: 20px;
+            font-weight: bold;
+            color: black;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+
+        .margin {
+            margin-left: 35px;
+            margin-right: 35px;
+        }
+    </style>
+</head>
+
+@{
+    if ((QLTC.Models.Notice.logIn == false && QLTC.Models.Notice.adminLogIn == false) || (QLTC.Models.Notice.logIn == true && QLTC.Models.Notice.adminLogIn == false))
+    {
+        <script>
+            alert("Bạn không có quyền truy cập trang web này")
+            window.location = "/Home/Main"
+        </script>
+    }
+    else
+    {
+
+        <body class="no-sidebar is-preload">
+            <div id="page-wrapper">
+
+                <!-- Header -->
+                <section id="header" class="wrapper">
+
+                    <!-- Logo -->
+                    <div id="logo">
+                        <h1><a href="#">THÊM DỊCH VỤ</a></h1>
+                    </div>
+
+                    <!-- Nav -->
+                    <nav id="nav">
+                        <ul>
+                            <li><a href="/Home/Main">Trang chủ</a></li>
+                            <li><a href="/MonAn/MonAnM">Quản lý món ăn</a></li>
+                            <li><a href="/DichVu/DichVuM">Quản lý dịch vụ</a></li>
+                            <li><a href="/Ca/CaM">Quản lý ca</a></li>
+                            <li><a href="/Sanh/SanhM">Quản lý sảnh</a></li>
+                            <li><a href="/QuyDinh/QuyDinhM">Quản lý quy định</a></li>
+                            <li><a href="/BaoCao/BaoCao">Lập báo cáo</a></li>
+                        </ul>
+                    </nav>
+                </section>
+
+                <!-- Main -->
+                <div id="main" class="wrapper style2">
+                    <div class="container">
+                        <!-- Content -->
+                        <div id="content">
+                            <article class="box post">
+                                <div class="row">
+                                    <!-- Contact Form -->
+                                    <section>
+                                        <form action="/DichVu/DichVuM" method="post">
+                                            <div class="row gtr-50">
+                                                <div class="col-6 col-12-small">
+                                                    <p>Tên dịch vụ: </p>
+                                                    <input type="text" name="name1" id="name1" placeholder="Nhập vào tên dịch vụ:" />
+                                                </div>
+                                                <div class="col-6 col-12-small">
+                                                    <p>Số lượng: </p>
+                                                    <input type="text" name="number1" id="number1" placeholder="Nhập số lượng:" />
+                                                </div>
+                                                <div class="col-6 col-12-small">
+                                                    <p>Giá dịch vụ: </p>
+                                                    <input type="text" name="price" id="price" placeholder="Nhập giá dịch vụ:" />
+                                                </div>
+                                                <br>
+                                                <div class="col-12">
+                                                    <ul class="actions">
+                                                        <li><input type="submit" id="shiftsubmit" class="style1" value="Thêm" /></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </section>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer -->
+                <section id="footer" class="wrapper">
+                    <div class="title">The Rest Of It</div>
+                    <div class="container">
+                        <header class="style1">
+                            <h2>Ipsum sapien elementum portitor?</h2>
+                            <p>
+                                Sed turpis tortor, tincidunt sed ornare in metus porttitor mollis nunc in aliquet.<br />
+                                Nam pharetra laoreet imperdiet volutpat etiam feugiat.
+                            </p>
+                        </header>
+                        <div class="row">
+                            <div class="col-6 col-12-medium">
+
+                                <!-- Contact Form -->
+                                <section>
+                                    <form action="#">
+                                        <div class="row gtr-50">
+                                            <div class="col-6 col-12-small">
+                                                <input type="text" name="name" id="contact-name" placeholder="Name" />
+                                            </div>
+                                            <div class="col-6 col-12-small">
+                                                <input type="text" name="email" id="contact-email" placeholder="Email" />
+                                            </div>
+                                            <div class="col-12">
+                                                <textarea name="message" id="contact-message" placeholder="Message" rows="4"></textarea>
+                                            </div>
+                                            <div class="col-12">
+                                                <ul class="actions">
+                                                    <li><input type="submit" class="style1" value="Send" /></li>
+                                                    <li><input type="reset" class="style2" value="Reset" /></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </section>
+
+                            </div>
+                            <div class="col-6 col-12-medium">
+
+                                <!-- Contact -->
+                                <section class="feature-list small">
+                                    <div class="row">
+                                        <div class="col-6 col-12-small">
+                                            <section>
+                                                <h3 class="icon fa-home">Mailing Address</h3>
+                                                <p>
+                                                    Untitled Corp<br />
+                                                    1234 Somewhere Rd<br />
+                                                    Nashville, TN 00000
+                                                </p>
+                                            </section>
+                                        </div>
+                                        <div class="col-6 col-12-small">
+                                            <section>
+                                                <h3 class="icon fa-comment">Social</h3>
+                                                <p>
+                                                    <a href="#"></a><br />
+                                                    <a href="#">linkedin.com/untitled</a><br />
+                                                    <a href="#">facebook.com/untitled</a>
+                                                </p>
+                                            </section>
+                                        </div>
+                                        <div class="col-6 col-12-small">
+                                            <section>
+                                                <h3 class="icon fa-envelope">Email</h3>
+                                                <p>
+                                                    <a href="#">info@untitled.tld</a>
+                                                </p>
+                                            </section>
+                                        </div>
+                                        <div class="col-6 col-12-small">
+                                            <section>
+                                                <h3 class="icon fa-phone">Phone</h3>
+                                                <p>
+                                                    (000) 555-0000
+                                                </p>
+                                            </section>
+                                        </div>
+                                    </div>
+                                </section>
+
+                            </div>
+                        </div>
+                        <div id="copyright">
+                            <ul>
+                                <li>&copy; Untitled.</li>
+                                <li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+
+            <!-- Scripts -->
+            <script src="~/Scripts/jquery.min.js"></script>
+            <script src="~/Scripts/jquery.dropotron.min.js"></script>
+            <script src="~/Scripts/browser.min.js"></script>
+            <script src="~/Scripts/breakpoints.min.js"></script>
+            <script src="~/Scripts/util.js"></script>
+            <script src="~/Scripts/main.js"></script>
+
+            <script>
+                $(function () {
+                    $('#shiftsubmit').click(function () {
+                        if (!$("#name1").val().length) {
+                            alert('Tên dịch vụ không được để trống');
+                            return false;
+                        }
+
+                        if ($("#name1").val().length > 50) {
+                            alert("Tên dịch vụ không được nhiều hơn 50 ký tự");
+                            return false;
+                        }
+
+                        if (/^\d+$/.test($("#name1").val())) {
+                            alert("Tên dịch vụ không được ghi chữ có số!");
+                            return false;
+                        }
+
+                        var regex = /^[A-Za-z0-9 ]+$/;
+
+                        if (!regex.test($("#name1").val())) {
+                            alert("Tên dịch vụ không được có ký tự đặc biệt!");
+                            return false;
+                        }
+
+                        if (!$("#number1").val().length) {
+                            alert('Số lượng dịch vụ không được để trống');
+                            return false;
+                        }
+
+                        if (parseInt($("#number1").val()) > 100) {
+                            alert("Số lượng của một dịch vụ không lớn hơn 100");
+                            return false;
+                        }
+
+                        if (/\D/.test($("#number1").val())) {
+                            alert("Số lượng dịch vụ không được ghi chữ, kí tự đặc biệt hoặc có dấu cách!");
+                            return false;
+                        }
+
+                        if (!$("#price").val().length) {
+                            alert('Giá dịch vụ không được để trống');
+                            return false;
+                        }
+
+                        if (/\D/.test($("#price").val())) {
+                            alert("Giá dịch vụ không được ghi chữ, kí tự đặc biệt hoặc có dấu cách!");
+                            return false;
+                        }
+
+                        else {
+                            $.ajax({
+                                type: "POST",
+                                url: '@Url.Action("XacNhanThem1", "DichVu")',
+                                dataType: "html",
+                                contentType: "application/json; charset=utf-8",
+                                data: JSON.stringify({
+                                    tendv: $('#name1').val(),
+                                    soluong: $('#number1').val(),
+                                    gia: $('#price').val()
+                                }),
+                                success:
+                                    function (data) { }
+
+                            });
+                            alert('Thêm thành công!!');
+                        }
+                    });
+                });
+            </script>
+        </body>
+
+    }
+
+}
+
+</html>

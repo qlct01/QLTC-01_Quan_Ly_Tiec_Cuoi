@@ -1,0 +1,289 @@
+﻿@model QLTC.Models.BaoCaoList
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Golden Flower</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="~/Content/main.css" />
+    <style>
+
+        #element1 {
+            display: inline-block;
+            margin-right: 10px;
+            width: 250px;
+        }
+
+        #element2 {
+            display: inline-block;
+            width: 250px;
+        }
+
+
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 16px;
+        }
+
+        th {
+            font-size: 20px;
+            font-weight: bold;
+            color: black;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+
+        .margin {
+            margin-left: 35px;
+            margin-right: 35px;
+        }
+    </style>
+
+</head>
+
+@{
+    if ((QLTC.Models.Notice.logIn == false && QLTC.Models.Notice.adminLogIn == false) || (QLTC.Models.Notice.logIn == true && QLTC.Models.Notice.adminLogIn == false))
+    {
+        <script>
+            alert("Bạn không có quyền truy cập trang web này")
+            window.location = "/Home/Main"
+        </script>
+    }
+    else
+    {
+
+        <body class="no-sidebar is-preload">
+            <div id="page-wrapper">
+
+                <!-- Header -->
+                <section id="header" class="wrapper">
+
+                    <!-- Logo -->
+                    <div id="logo">
+                        <h1><a href="#">BÁO CÁO</a></h1>
+                    </div>
+
+                    <!-- Nav -->
+                    <nav id="nav">
+                        <ul>
+                            <li><a href="/Home/Main">Trang chủ</a></li>
+                            <li><a href="/MonAn/MonAnM">Quản lý món ăn</a></li>
+                            <li><a href="/DichVu/DichVuM">Quản lý dịch vụ</a></li>
+                            <li><a href="/Ca/CaM">Quản lý ca</a></li>
+                            <li><a href="/Sanh/SanhM">Quản lý sảnh</a></li>
+                            <li><a href="/QuyDinh/QuyDinhM">Quản lý quy định</a></li>
+                            <li><a href="/BaoCao/BaoCao">Lập báo cáo</a></li>
+                        </ul>
+                    </nav>
+                </section>
+
+
+                <!-- Main -->
+                <div id="main" class="wrapper style2">
+                    <div class="container">
+
+                        <!-- Content -->
+                        <div id="content">
+                            <article class="box post">
+                                <div>
+                                    <!-- Contact Form -->
+                                    <section>
+                                        <form action="~/BaoCao/BaoCao">
+                                            <div align="center">
+                                                <div>
+                                                    <label id="element1" class="form-check-label" for="defaultCheck1">
+                                                        <font size="6">Tháng</font>
+                                                    </label>
+                                                    <input type="month" id="element2" name="thang" min="2014-04" max="2021-09" />
+                                                    <div>
+
+                                                        <div>
+                                                            <label id="element1" class="form-check-label" for="defaultCheck1">
+                                                                <font size="6">Tổng doanh thu</font>
+                                                            </label>
+                                                            <input type="text" maxlength="10" id="element2" disabled value="@QLTC.Models.Notice.tongDoanhThu" />
+                                                            <div>
+                                                                <br>
+
+                                                                <div style="overflow-x:auto;">
+                                                                    <table id="myTable">
+                                                                        <tr>
+                                                                            <th>Ngày</th>
+                                                                            <th>Số lượng tiệc</th>
+                                                                            <th>DoanhThu</th>
+                                                                        </tr>
+                                                                        @{
+                                                                            try
+                                                                            {
+                                                                                foreach (var item in Model.baoCao_List)
+                                                                                {
+                                                                                    <tr>
+                                                                                        <td>@item.Ngay</td>
+                                                                                        <td>@item.SoLuongTiec</td>
+                                                                                        <td>@item.DoanhThu</td>
+                                                                                    </tr>
+                                                                                }
+                                                                            }
+                                                                            catch
+                                                                            {
+
+                                                                            }
+                                                                        }
+
+                                                                    </table>
+                                                                </div>
+
+
+                                                                <div style="margin-top: 50px" class="col-12">
+                                                                    <ul class="actions">
+                                                                        <li><input style="margin-right: 50px" type="submit" class="style2" value="Lập báo cáo" id="lapbaocao" /></li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </section>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer -->
+                <section id="footer" class="wrapper">
+                    <div class="title">Liên hệ</div>
+                    <div class="container">
+                        <header class="style1">
+                            <h2>Liên hệ ngay với chúng tôi để được tư vấn thêm</h2>
+                            <p>
+                                Nếu có gì không hài lòng mong quý khách phản hồi theo thông tin phía dưới.<br />
+                                Xin lỗi nếu làm quý khách phiền lòng.
+                            </p>
+                        </header>
+                        <div class="row">
+                            <div class="col-6 col-12-medium">
+
+                                <!-- Contact Form -->
+                                <section>
+                                    <form method="post" action="#">
+                                        <div class="row gtr-50">
+                                            <div class="col-6 col-12-small">
+                                                <input type="text" name="name" id="contact-name" placeholder="Name" />
+                                            </div>
+                                            <div class="col-6 col-12-small">
+                                                <input type="text" name="email" id="contact-email" placeholder="Email" />
+                                            </div>
+                                            <div class="col-12">
+                                                <textarea name="message" id="contact-message" placeholder="Message" rows="4"></textarea>
+                                            </div>
+                                            <div class="col-12">
+                                                <ul class="actions">
+                                                    <li><input type="submit" class="style1" value="Send" /></li>
+                                                    <li><input type="reset" class="style2" value="Reset" /></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </section>
+
+                            </div>
+                            <div class="col-6 col-12-medium">
+
+                                <!-- Contact -->
+                                <section class="feature-list small">
+                                    <div class="row">
+                                        <div class="col-6 col-12-small">
+                                            <section>
+                                                <h3 class="icon fa-home">Địa chỉ</h3>
+                                                <p>
+                                                    56 Sư Vạn hạnh<br />
+                                                    Quận 10, TP.HCM<br />
+                                                </p>
+                                            </section>
+                                        </div>
+                                        <div class="col-6 col-12-small">
+                                            <section>
+                                                <h3 class="icon fa-comment">Cộng đồng</h3>
+                                                <p>
+                                                    <a href="#">facebook.com/goldenflower</a><br />
+                                                </p>
+                                            </section>
+                                        </div>
+                                        <div class="col-6 col-12-small">
+                                            <section>
+                                                <h3 class="icon fa-envelope">Email</h3>
+                                                <p>
+                                                    <a href="#">baohua01234@gmail.com</a>
+                                                </p>
+                                            </section>
+                                        </div>
+                                        <div class="col-6 col-12-small">
+                                            <section>
+                                                <h3 class="icon fa-phone">Điện thoại</h3>
+                                                <p>
+                                                    0908545151544
+                                                </p>
+                                            </section>
+                                        </div>
+                                    </div>
+                                </section>
+
+                            </div>
+                        </div>
+                        <div id="copyright">
+                            <ul>
+                                <li>&copy; Golden Flower</li>
+                                <li>Design: <a href="">Nhom lap trinh web</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+
+            <!-- Scripts -->
+            <script src="~/Scripts/jquery.min.js"></script>
+            <script src="~/Scripts/jquery.dropotron.min.js"></script>
+            <script src="~/Scripts/browser.min.js"></script>
+            <script src="~/Scripts/breakpoints.min.js"></script>
+            <script src="~/Scripts/util.js"></script>
+            <script src="~/Scripts/main.js"></script>
+
+
+            @{
+                if (QLTC.Models.Notice.i_E > 0)
+                {
+                    <script>
+                        if (document.getElementById("myTable").rows.length < 2) {
+                            alert("Tháng bạn chọn hiện không khả dụng! Vui lòng chọn tháng khác");
+                        }
+                    </script>
+                }
+
+            }
+        </body>
+
+    }
+
+}
+
+
+
+
+</html>
